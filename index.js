@@ -19,7 +19,9 @@ const io=new Server(expressServer)
 io.on('connection',(Socket)=>{
 
     Socket.join('kithen-room');
-    io.sockets.in('kithen-room').emit('cooking',"Fried Rice Cooking")
+    let sizeOfKitchen=io.sockets.adapter.rooms.get('kithen-room').size;
+    io.sockets.in('kithen-room').emit('cooking',"Fried Rice Cooking="+sizeOfKitchen)
+    io.sockets.in('kithen-room').emit('boiling',"boiling Water")
 
 
     Socket.join('bed-room');
