@@ -11,30 +11,23 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 import { Server } from "socket.io";
-import { Socket } from "dgram";
+
+
 
 const io=new Server(expressServer)
 
-
-
-
-
 io.on('connection',(Socket)=>{
-    console.log("New user connected")
 
-    Socket.on('chat',(msg)=>{
-        console.log(msg)
+    Socket.join('kithen-room');
+    io.sockets.in('kithen-room').emit('cooking',"Fried Rice Cooking")
 
-        io.emit('chat_send',msg)
 
-    })
-
+    Socket.join('bed-room');
+    io.sockets.in('bed-room').emit('sleep',"I am sleeping")
 
 
 
 })
-
-
 
 
 
